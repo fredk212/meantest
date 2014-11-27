@@ -1,5 +1,6 @@
 var Todo = require('./models/todo');
 
+
 function getTodos(res){
 	Todo.find(function(err, todos) {
 
@@ -26,7 +27,7 @@ module.exports = function(app) {
 
 		// create a todo, information comes from AJAX request from Angular
 		Todo.create({
-			text : req.body.text,
+			text : req.body.text,			
 			done : false
 		}, function(err, todo) {
 			if (err)
