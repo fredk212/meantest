@@ -23,6 +23,7 @@ angular.module('todoController', [])
 			if ($scope.formData.text != undefined) {
 				$scope.loading = true;
 
+				
 				// call the create function from our service (returns a promise object)
 				Todos.create($scope.formData)
 
