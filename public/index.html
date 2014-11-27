@@ -14,11 +14,9 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
 		html 					{ overflow-y:scroll; }
-		body 					{ padding-top:50px;margin: 0;z-index:1000!important;}
-		#todo-list 				{ margin-bottom:30px;color:white; }
+		body 					{ padding-top:50px; }
+		#todo-list 				{ margin-bottom:30px; }
 		#todo-form 	 			{ margin-bottom:50px; }
-		canvas { width: 100%; height: 100%;position:absolute;top:0;left:0;z-index:-1!important;}
-
 	</style>
 
 	<!-- SPELLS -->
@@ -27,18 +25,15 @@
 	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
 	<script src="js/services/todos.js"></script> <!-- load our todo service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
-	<script src="node_modules/moment/moment.js"></script> <!-- load moment for date display in our main application -->
-	<script src="http://threejs.org/build/three.min.js"></script> <!-- load three js to render images to webgl or canvas -->
 
 </head>
 <!-- SET THE CONTROLLER -->
 <body ng-controller="mainController">
 	<div class="container">
+
 		<!-- HEADER AND TODO COUNT -->
 		<div class="jumbotron text-center">
-			<h1>There are <span class="label label-info">{{ todos.length }}</span> messages on your message board.</h1>
-			</br>
-
+			<h1>There are <span class="label label-info">{{ todos.length }}</span> items in your list.</h1>
 		</div>
 
 		<!-- TODO LIST -->
@@ -50,7 +45,7 @@
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
 				<div class="checkbox" ng-repeat="todo in todos">
 					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)">Content: {{ todo.text }} <br /> Created on: {{todo.date}}         
+						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
 					</label>
 				</div>
 
@@ -68,7 +63,7 @@
 					<div class="form-group">
 
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="Add a message to the message board!" ng-model="formData.text">
+						<input type="text" class="form-control input-lg text-center" placeholder="Enter text here for your list!" ng-model="formData.text">
 					</div>
 
 					<!-- createToDo() WILL CREATE NEW TODOS -->
@@ -79,31 +74,6 @@
 
 
 	</div>
-<script> 
-			var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
 
-			var renderer = new THREE.WebGLRenderer();
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			document.body.appendChild(renderer.domElement);
-
-			var geometry = new THREE.BoxGeometry(700, 700, 700, 10, 10, 10);
-			var material = new THREE.MeshBasicMaterial({color: 0xfffff, wireframe: true});
-			var cube = new THREE.Mesh(geometry, material);
-			scene.add(cube);
-
-            camera.position.z = 1;			
-
-			function render() {
-				requestAnimationFrame(render);
-
-			    cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
-
-				renderer.render(scene, camera);
-			};
-
-			render();
-</script>
 </body>
 </html>
